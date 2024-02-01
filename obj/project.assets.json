@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wexev\\Desktop\\MyGameProject\\MyGameProject.csproj",
+      "projectUniqueName": "C:\\Users\\Wexev\\Documents\\GitHub\\2D-Game\\MyGameProject.csproj",
       "projectName": "MyGameProject",
-      "projectPath": "C:\\Users\\Wexev\\Desktop\\MyGameProject\\MyGameProject.csproj",
+      "projectPath": "C:\\Users\\Wexev\\Documents\\GitHub\\2D-Game\\MyGameProject.csproj",
       "packagesPath": "C:\\Users\\Wexev\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wexev\\Desktop\\MyGameProject\\obj\\",
+      "outputPath": "C:\\Users\\Wexev\\Documents\\GitHub\\2D-Game\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

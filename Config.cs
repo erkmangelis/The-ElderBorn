@@ -3,14 +3,16 @@ namespace MyGameProject
 
     public static class Config
     {
+        // Game Settings
+        public static int FPS = 60;
+        public static int tileSize = 48;
+
         
         // Screen Settings
-        public static int tileSize = 48;
         public static int maxScreenCol = 16;
         public static int maxScreenRow = 12;
         public static int screenWidth = tileSize * maxScreenCol;
         public static int screenHeight = tileSize * maxScreenRow;
-        public static int FPS = 60;
 
 
         // World Settings
