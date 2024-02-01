@@ -1,0 +1,3 @@
+# ignore files in directory
+bin/
+obj/
