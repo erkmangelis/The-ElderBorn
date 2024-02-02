@@ -105,19 +105,22 @@ namespace MyGameProject
 
                 // Calculate the remaining time
                 long remainingTime = drawInterval - stopwatch.ElapsedTicks;
-                // Add passed time to the timer every iteration
-                timer += stopwatch.ElapsedTicks + remainingTime;
+
                 // Increase the drawCount every iteration
                 drawCount++;
                 
-
+                // Add passed time to the timer every iteration before the sleep
                 // If there's remaining time, sleep the thread
                 if (remainingTime > 0)
                 {
-                    Thread.Sleep(TimeSpan.FromTicks(remainingTime));
+                    timer += stopwatch.ElapsedTicks + remainingTime;
+                    Thread.Sleep(TimeSpan.FromTicks(remainingTime));    
+                }
+                else if (remainingTime < 0)
+                {
+                    timer += stopwatch.ElapsedTicks;
                 }
                 
-
                 // If 1 second passed
                 if (timer >= 1000000)
                 {
