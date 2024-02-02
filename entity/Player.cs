@@ -18,6 +18,13 @@ namespace MyGameProject
             screenX = Config.screenWidth / 2 - (Config.tileSize / 2);
             screenY = Config.screenHeight / 2 - (Config.tileSize / 2);
 
+            // Player collision box size values
+            cbX = 15;
+            cbY = 24;
+            cbWidth = 14;
+            cbHeight = 24;
+            collisionBox = new Rectangle(cbX, cbY, cbWidth, cbHeight);
+
             setDefaultValues();
             getPlayerSprite();
         }
@@ -28,7 +35,7 @@ namespace MyGameProject
         {
             worldX = Config.tileSize*25;
             worldY = Config.tileSize*25;
-            baseSpeed = 4;
+            speed = 4;
             direction = "down";
         }
 
@@ -58,48 +65,75 @@ namespace MyGameProject
         // Update player
         public void update()
         {
-            // Only increase the spriteCounter while the player is moving
-            if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed)
-            {
-                spriteCounter++;
-            }
+            // Default collision value
+            collisionOn = false;
+
+            // Check any tile has collide with the player
+            gamePanel.collisionD.checkTile(this);
 
 
-            int speed;
+            int newSpeed = speed;
             // Speed calibration for the diagonal movement
             if (keyH.DiagonalMovement())
             {
-                speed = (int)Math.Round(baseSpeed * 0.707);
+                newSpeed = (int)Math.Round(speed * 0.707);
             }
             else
             {
-                speed = baseSpeed;
+                newSpeed = speed;
             }
 
 
-            // Vertical Movement
+            // Set player's vertical direction
             if (keyH.upPressed)
             {
                 direction = "up";
-                worldY -= speed;
             }
             else if (keyH.downPressed)
             {
                 direction = "down";
-                worldY += speed;
             }
 
-
-            // Horizontal Movement
+            // Set player's horizontal direction
             if (keyH.leftPressed)
             {
                 direction = "left";
-                worldX -= speed;
             }
             else if (keyH.rightPressed)
             {
                 direction = "right";
-                worldX += speed;
+            }
+
+
+            // Move the player
+            if (keyH.isMoving())
+            {
+                // Only increase the spriteCounter while the player is moving
+                spriteCounter++;
+
+                // If player not collide any block, can move
+                if (!collisionOn)
+                {
+                    // Vertical Movement
+                    if (keyH.upPressed)
+                    {
+                        worldY -= newSpeed;
+                    }
+                    else if (keyH.downPressed)
+                    {
+                        worldY += newSpeed;
+                    }
+
+                    // Horizontal Movement
+                    if (keyH.leftPressed)
+                    {
+                        worldX -= newSpeed;
+                    }
+                    else if (keyH.rightPressed)
+                    {
+                        worldX += newSpeed;
+                    }
+                }
             }
 
 
@@ -111,7 +145,6 @@ namespace MyGameProject
             }
         }
 
-        
         
         // Draw player
         public void draw(Graphics graphics)

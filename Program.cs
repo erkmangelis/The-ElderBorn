@@ -13,7 +13,7 @@ namespace MyGameProject
 
 
             // Initializing  the KeyHandler
-            KeyHandler keyH = new KeyHandler();
+            KeyHandler? keyH = new KeyHandler();
 
 
             // These values were found through trial and error.
@@ -36,18 +36,19 @@ namespace MyGameProject
             
 
             // Initializing  the GamePanel
-            GamePanel gamePanel = new GamePanel(keyH); // Create new GamePanel
+            GamePanel? gamePanel = new GamePanel(keyH); // Create new GamePanel
             //gamePanel.Dock = DockStyle.Fill; // Cover window with gamePanel
             window.Controls.Add(gamePanel);
             
             
             // Create new objects from classes
-            TileHandler tileH = new TileHandler(gamePanel);
-            Player player = new Player(gamePanel, keyH);
+            TileHandler? tileH = new TileHandler(gamePanel);
+            Player? player = new Player(gamePanel, keyH);
+            CollisionDetector? collisionD = new CollisionDetector(gamePanel);
 
 
             // Sets created class to gamePanel
-            gamePanel.setComponents(player, tileH);
+            gamePanel.setComponents(player, tileH, collisionD);
 
 
             // Thread Start-Stop

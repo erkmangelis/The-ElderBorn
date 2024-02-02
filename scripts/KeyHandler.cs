@@ -49,7 +49,15 @@ namespace MyGameProject
         }
 
 
-        // Handle Diagonal Movement
+        // Check is player moving
+        public bool isMoving()
+        {
+            bool isMoving = (leftPressed || rightPressed || upPressed || downPressed);
+            return isMoving;
+        }
+
+
+        // Check is player moving diagonal
         public bool DiagonalMovement()
         {
             //      Diagonal    =         Moving Horizontal     and      Moving Vertical

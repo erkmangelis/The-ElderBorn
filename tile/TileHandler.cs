@@ -3,8 +3,8 @@ namespace MyGameProject
     public class TileHandler
     {
         GamePanel gamePanel;
-        Tile[] tile;
-        int[,] mapTileNumber;
+        public Tile[] tile;
+        public int[,] mapTileNumber;
 
 
         // Initialization
@@ -16,6 +16,7 @@ namespace MyGameProject
             mapTileNumber = new int[Config.maxWorldCol, Config.maxWorldRow];
 
             getTileSprite();
+
             // Set the map path
             loadMap("./maps/map.txt");
         }
@@ -55,6 +56,7 @@ namespace MyGameProject
                 tile[12].sprite = new Bitmap("./assets/tiles/grass_lilrocks.png");
                 tile[13] = new Tile();
                 tile[13].sprite = new Bitmap("./assets/tiles/grass_rock.png");
+                tile[13].collision = true;
                 tile[14] = new Tile();
                 tile[14].sprite = new Bitmap("./assets/tiles/grass_redflowers.png");
                 tile[15] = new Tile();
@@ -63,34 +65,49 @@ namespace MyGameProject
                 tile[16].sprite = new Bitmap("./assets/tiles/grass_whiteflowers.png");
                 tile[17] = new Tile();
                 tile[17].sprite = new Bitmap("./assets/tiles/water.png");
+                tile[17].collision = true;
                 tile[18] = new Tile();
                 tile[18].sprite = new Bitmap("./assets/tiles/water_leftup.png");
+                tile[18].collision = true;
                 tile[19] = new Tile();
                 tile[19].sprite = new Bitmap("./assets/tiles/water_rightup.png");
+                tile[19].collision = true;
                 tile[20] = new Tile();
                 tile[20].sprite = new Bitmap("./assets/tiles/water_up.png");
+                tile[20].collision = true;
                 tile[21] = new Tile();
                 tile[21].sprite = new Bitmap("./assets/tiles/water_left.png");
+                tile[21].collision = true;
                 tile[22] = new Tile();
                 tile[22].sprite = new Bitmap("./assets/tiles/water_right.png");
+                tile[22].collision = true;
                 tile[23] = new Tile();
                 tile[23].sprite = new Bitmap("./assets/tiles/water_leftdown.png");
+                tile[23].collision = true;
                 tile[24] = new Tile();
                 tile[24].sprite = new Bitmap("./assets/tiles/water_rightdown.png");
+                tile[24].collision = true;
                 tile[25] = new Tile();
                 tile[25].sprite = new Bitmap("./assets/tiles/water_down.png");
+                tile[25].collision = true;
                 tile[26] = new Tile();
                 tile[26].sprite = new Bitmap("./assets/tiles/water_lilypad.png");
+                tile[26].collision = true;
                 tile[27] = new Tile();
                 tile[27].sprite = new Bitmap("./assets/tiles/water_seagrass.png");
+                tile[27].collision = true;
                 tile[28] = new Tile();
                 tile[28].sprite = new Bitmap("./assets/tiles/water_smallwave.png");
+                tile[28].collision = true;
                 tile[29] = new Tile();
                 tile[29].sprite = new Bitmap("./assets/tiles/water_bigwave.png");
+                tile[29].collision = true;
                 tile[30] = new Tile();
                 tile[30].sprite = new Bitmap("./assets/tiles/wall.png");
+                tile[30].collision = true;
                 tile[31] = new Tile();
                 tile[31].sprite = new Bitmap("./assets/tiles/tree.png");
+                tile[31].collision = true;
                 tile[32] = new Tile();
                 tile[32].sprite = new Bitmap("./assets/tiles/dirt_innerleftu.png");
                 tile[33] = new Tile();

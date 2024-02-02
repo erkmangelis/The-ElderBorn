@@ -23,10 +23,11 @@ namespace MyGameProject
         int FPS;
 
         // Declaring Classes
-        KeyHandler keyH = new KeyHandler();
+        KeyHandler? keyH = new KeyHandler();
         Thread? gameThread;
         public Player? player;
-        TileHandler? tileH;
+        public TileHandler? tileH;
+        public CollisionDetector? collisionD;
         
 
         // Temp
@@ -47,10 +48,11 @@ namespace MyGameProject
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd)
         {
             player = p;
             tileH = th;
+            collisionD = cd;
         }
 
 
