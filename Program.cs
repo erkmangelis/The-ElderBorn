@@ -45,10 +45,11 @@ namespace MyGameProject
             TileHandler? tileH = new TileHandler(gamePanel);
             Player? player = new Player(gamePanel, keyH);
             CollisionDetector? collisionD = new CollisionDetector(gamePanel);
+            ObjectHandler? objectH = new ObjectHandler(gamePanel);
 
 
-            // Sets created class to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD);
+            // Sets created objects to gamePanel
+            gamePanel.setComponents(player, tileH, collisionD, objectH);
 
 
             // Thread Start-Stop

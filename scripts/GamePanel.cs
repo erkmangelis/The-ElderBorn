@@ -28,10 +28,11 @@ namespace MyGameProject
         public Player? player;
         public TileHandler? tileH;
         public CollisionDetector? collisionD;
+        public ObjectHandler? objectH;
         
 
         // Temp
-        string text = "";
+        string FPSCounter = "";
 
 
         // Initialization
@@ -48,11 +49,19 @@ namespace MyGameProject
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh)
         {
             player = p;
             tileH = th;
             collisionD = cd;
+            objectH = oh;
+        }
+
+
+        // Prepare the components that must be ready before the game start
+        public void setupGame()
+        {
+
         }
 
 
@@ -127,7 +136,7 @@ namespace MyGameProject
                 if (timer >= 1000000)
                 {
                     // Print out the FPS
-                    text = "FPS: " + Convert.ToString(drawCount);
+                    FPSCounter = "FPS: " + Convert.ToString(drawCount);
 
                     // Reset the timer and drawCount
                     drawCount = 0;
@@ -155,11 +164,17 @@ namespace MyGameProject
 
 
             // Components that must be rendered
+            // Tile
             tileH.draw(graphics);
+
+            // Object
+            objectH.draw(graphics);
+
+            // Player
             player.draw(graphics);
 
-            Font myFont = new Font("Arial", 16);
-            graphics.DrawString(text, myFont, Brushes.White, new PointF(10,10));
+            Font myFont = new Font("Arial", 12);
+            graphics.DrawString(FPSCounter, myFont, Brushes.White, new PointF(5,5));
         }
         
     }
