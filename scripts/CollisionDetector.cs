@@ -80,6 +80,85 @@ namespace MyGameProject
                     break;
             }
         }
+
+
+        // Check for objects that collide with the player
+        public int checkObject(Entity entity, bool player)
+        {
+            int index = int.MaxValue; 
+
+            for (int i = 0; i < gamePanel.objectH.objects.Length; i++)
+            {
+                if (gamePanel.objectH.objects[i] != null)
+                {
+
+                    // Entity's collision box position
+                    entity.collisionBox.X = entity.worldX + entity.collisionBox.X;
+                    entity.collisionBox.Y = entity.worldY + entity.collisionBox.Y;
+
+                    // Object's collision box position
+                    gamePanel.objectH.objects[i].collisionBox.X = gamePanel.objectH.objects[i].worldX + gamePanel.objectH.objects[i].collisionBox.X;
+                    gamePanel.objectH.objects[i].collisionBox.Y = gamePanel.objectH.objects[i].worldY + gamePanel.objectH.objects[i].collisionBox.Y;
+
+
+                    switch (entity.direction)
+                    {
+                        case "up":
+                            entity.collisionBox.Y -= entity.speed;
+
+                            if (entity.collisionBox.IntersectsWith(gamePanel.objectH.objects[i].collisionBox))
+                            {
+                                entity.collisionOn = gamePanel.objectH.objects[i].collision;
+                                
+                                index = (player) ? i : index;
+                            }
+                            break;
+                        
+                        case "down":
+                            entity.collisionBox.Y += entity.speed;
+
+                            if (entity.collisionBox.IntersectsWith(gamePanel.objectH.objects[i].collisionBox))
+                            {
+                                entity.collisionOn = gamePanel.objectH.objects[i].collision;
+                                
+                                index = (player) ? i : index;
+                            }
+                            break;
+
+                        case "left":
+                            entity.collisionBox.X -= entity.speed;
+
+                            if (entity.collisionBox.IntersectsWith(gamePanel.objectH.objects[i].collisionBox))
+                            {
+                                entity.collisionOn = gamePanel.objectH.objects[i].collision;
+                                
+                                index = (player) ? i : index;
+                            }
+                            break;
+
+                        case "right":
+                            entity.collisionBox.X += entity.speed;
+
+                            if (entity.collisionBox.IntersectsWith(gamePanel.objectH.objects[i].collisionBox))
+                            {
+                                entity.collisionOn = gamePanel.objectH.objects[i].collision;
+                                
+                                index = (player) ? i : index;
+                            }
+                            break;
+                    }
+
+                    entity.collisionBox.X = entity.cbDefaultX;
+                    entity.collisionBox.Y = entity.cbDefaultY;
+
+                    gamePanel.objectH.objects[i].collisionBox.X = gamePanel.objectH.objects[i].cbDefaultX;
+                    gamePanel.objectH.objects[i].collisionBox.Y = gamePanel.objectH.objects[i].cbDefaultY;
+
+                }
+            }
+
+            return index;
+        }
     }
 
 }

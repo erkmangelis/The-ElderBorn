@@ -14,6 +14,8 @@ namespace MyGameProject
         public bool collisionOn = false;
         public int cbX; // CollisioBox's x value
         public int cbY; // CollisionBox's y value
+        public int cbDefaultX;
+        public int cbDefaultY;
         public int cbWidth; // CollisionBox's width value
         public int cbHeight; // CollisionBox's Height value
         public Rectangle collisionBox;

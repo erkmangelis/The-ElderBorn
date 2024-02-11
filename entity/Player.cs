@@ -9,6 +9,10 @@ namespace MyGameProject
         public int screenY;
 
 
+        // Items
+        int coin = 0;
+
+
         // Initialization
         public Player(GamePanel gameP, KeyHandler keyH)
         {
@@ -21,6 +25,8 @@ namespace MyGameProject
             // Player collision box size values
             cbX = 15;
             cbY = 24;
+            cbDefaultX = cbX;
+            cbDefaultY = cbY;
             cbWidth = 14;
             cbHeight = 24;
             collisionBox = new Rectangle(cbX, cbY, cbWidth, cbHeight);
@@ -70,6 +76,10 @@ namespace MyGameProject
 
             // Check any tile has collide with the player
             gamePanel.collisionD.checkTile(this);
+
+            // Check any object has collide with the player
+            int objectIndex = gamePanel.collisionD.checkObject(this, true);
+            interactWithObject(objectIndex);
 
 
             int newSpeed = speed;
@@ -145,6 +155,32 @@ namespace MyGameProject
             }
         }
 
+
+        // Player's interaction with the object
+        public void interactWithObject(int i)
+        {
+            if (i != int.MaxValue)
+            {
+                string objectName = gamePanel.objectH.objects[i].name;
+
+                switch (objectName)
+                {
+                    case "Coin":
+                        coin++;
+                        gamePanel.objectH.objects[i] = null;
+                        break;
+
+                    case "Pig":
+                        if (coin == 3)
+                        {
+                            coin = 0;
+                            gamePanel.objectH.objects[i] = null;
+                        }
+                        break;
+                }
+            }
+        }
+
         
         // Draw player
         public void draw(Graphics graphics)
@@ -175,6 +211,10 @@ namespace MyGameProject
             
             // Draw player sprite
             graphics.DrawImage(sprite, new Rectangle (screenX, screenY, Config.tileSize, Config.tileSize));
+            
+            // Draw player's coin amount
+            string coinText = "Coin: " + Convert.ToString(coin);
+            graphics.DrawString(coinText, new Font("Arial", 12), Brushes.White, new PointF(700, 5));
         }
     }
 }

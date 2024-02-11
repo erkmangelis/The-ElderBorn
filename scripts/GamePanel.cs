@@ -33,6 +33,7 @@ namespace MyGameProject
 
         // Temp
         string FPSCounter = "";
+        public string log = "";
 
 
         // Initialization
@@ -175,6 +176,7 @@ namespace MyGameProject
 
             Font myFont = new Font("Arial", 12);
             graphics.DrawString(FPSCounter, myFont, Brushes.White, new PointF(5,5));
+            graphics.DrawString(log, myFont, Brushes.White, new PointF(700,5));
         }
         
     }

@@ -26,6 +26,14 @@ namespace MyGameProject
             objects[1] = new ObjectCoin();
             objects[1].worldX = 27 * Config.tileSize;
             objects[1].worldY = 27 * Config.tileSize;
+
+            objects[2] = new ObjectCoin();
+            objects[2].worldX = 23 * Config.tileSize;
+            objects[2].worldY = 25 * Config.tileSize;
+
+            objects[3] = new ObjectPig();
+            objects[3].worldX = 24 * Config.tileSize;
+            objects[3].worldY = 21 * Config.tileSize;
         }
     
 
