@@ -1,4 +1,4 @@
-namespace MyGameProject
+namespace ElderBorn
 {
 
     public class Entity
@@ -7,7 +7,8 @@ namespace MyGameProject
         public int speed;
 
         public Bitmap? up1, up2, down1, down2, left1, left2, right1, right2;
-        public string? direction;
+        public string? movingDirection;
+        public string? lookingDirection;
         public int spriteNumber;
         public int spriteCounter;
 

@@ -1,4 +1,4 @@
-namespace MyGameProject
+namespace ElderBorn
 {
     public class ObjectPig : SuperObject
     {

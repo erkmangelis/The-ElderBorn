@@ -1,4 +1,4 @@
-namespace MyGameProject
+namespace ElderBorn
 {
 
     public class CollisionDetector
@@ -29,7 +29,7 @@ namespace MyGameProject
 
 
             // Direction that entity going
-            switch (entity.direction)
+            switch (entity.movingDirection)
             {
                 case "up":
                     entityTopRow = (entityTopWorldY - entity.speed) / Config.tileSize;       // The row on above the player
@@ -101,7 +101,7 @@ namespace MyGameProject
                     gamePanel.objectH.objects[i].collisionBox.Y = gamePanel.objectH.objects[i].worldY + gamePanel.objectH.objects[i].collisionBox.Y;
 
 
-                    switch (entity.direction)
+                    switch (entity.movingDirection)
                     {
                         case "up":
                             entity.collisionBox.Y -= entity.speed;

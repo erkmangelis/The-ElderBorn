@@ -1,15 +1,15 @@
 using System;
 using System.Windows.Forms;
 
-namespace MyGameProject
+namespace ElderBorn
 {
     public static class Program
     {
         [STAThread]
         static void Main()
         {
-            // Create new form as window
-            Form window = new Form();
+            // Create new form as gameWindow
+            Form gameWindow = new Form();
 
 
             // Initializing  the KeyHandler
@@ -21,24 +21,30 @@ namespace MyGameProject
             int borderWidth = 16;
             int borderHeight = 39;
 
+
             // Window Settings
-            window.Size = new Size(Config.screenWidth + borderWidth, Config.screenHeight + borderHeight); // Window Size
-            window.Text = "My 2D Game"; // Window Title
-            window.StartPosition = FormStartPosition.CenterScreen; // Start Position
-            window.FormBorderStyle = FormBorderStyle.FixedSingle; // Window Style 
-            window.MaximizeBox = false; // Disable the Maximize Button on window
-            window.KeyDown += KeyDownEvent; // Call KeyDownEvent Function When KeyDown Event
-            window.KeyUp += KeyUpEvent; // Call KeyDownEvent Function When KeyUp Event
+            gameWindow.Size = new Size(Config.screenWidth + borderWidth, Config.screenHeight + borderHeight); // Window Size
+            gameWindow.Text = "The ElderBorn"; // Window Title
+
+            // Temp
+            string windowLog = "";
+
+            gameWindow.StartPosition = FormStartPosition.CenterScreen; // Start Position
+            gameWindow.FormBorderStyle = FormBorderStyle.FixedSingle; // Window Style 
+            gameWindow.MaximizeBox = false; // Disable the Maximize Button on window
+            gameWindow.KeyDown += KeyDownEvent; // Call KeyDownEvent Function When KeyDown Event
+            gameWindow.KeyUp += KeyUpEvent; // Call KeyDownEvent Function When KeyUp Event
+
 
             // Resize the window to panel size
-            //window.AutoSize = true;
-            //window.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //gameWindow.AutoSize = true;
+            //gameWindow.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             
 
             // Initializing  the GamePanel
             GamePanel? gamePanel = new GamePanel(keyH); // Create new GamePanel
             //gamePanel.Dock = DockStyle.Fill; // Cover window with gamePanel
-            window.Controls.Add(gamePanel);
+            gameWindow.Controls.Add(gamePanel);
             
             
             // Create new objects from classes
@@ -48,13 +54,16 @@ namespace MyGameProject
             ObjectHandler? objectH = new ObjectHandler(gamePanel);
 
 
+            Point windowOffset = gameWindow.PointToScreen(gamePanel.Location);
+
+
             // Sets created objects to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD, objectH);
+            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset);
 
 
             // Thread Start-Stop
             gamePanel.StartGameThread();
-            window.FormClosing += (sender, e) => gamePanel.StopGameThread();
+            gameWindow.FormClosing += (sender, e) => gamePanel.StopGameThread();
 
 
             // Listen Key Down Events and Send Info to KeyHandler Class
@@ -71,8 +80,8 @@ namespace MyGameProject
             }
 
 
-            // Run the window
-            Application.Run(window);
+            // Run the gameWindow
+            Application.Run(gameWindow);
         }
     }
 }

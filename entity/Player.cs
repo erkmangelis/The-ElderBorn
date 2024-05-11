@@ -1,4 +1,4 @@
-namespace MyGameProject
+namespace ElderBorn
 {
     public class Player : Entity
     {
@@ -42,7 +42,7 @@ namespace MyGameProject
             worldX = Config.tileSize*25;
             worldY = Config.tileSize*25;
             speed = 4;
-            direction = "down";
+            lookingDirection = "down";
         }
 
 
@@ -68,6 +68,10 @@ namespace MyGameProject
         }
 
 
+        int mouseX;
+        int mouseY;
+        int newSpeed;
+
         // Update player
         public void update()
         {
@@ -82,7 +86,7 @@ namespace MyGameProject
             interactWithObject(objectIndex);
 
 
-            int newSpeed = speed;
+            newSpeed = speed;
             // Speed calibration for the diagonal movement
             if (keyH.DiagonalMovement())
             {
@@ -93,25 +97,71 @@ namespace MyGameProject
                 newSpeed = speed;
             }
 
+            if (movingDirection != lookingDirection)
+            {
+                newSpeed = (int)Math.Round(newSpeed * (0.75));
+            }
+            else
+            {
+                newSpeed = speed;
+            }
 
-            // Set player's vertical direction
+
+            
+            // Offsetting the mouse position to center of the screen instead top left of the screen
+            mouseY = Control.MousePosition.Y - gamePanel.windowOffset.Y - Config.screenHeight/2;
+            mouseX = Control.MousePosition.X - gamePanel.windowOffset.X - Config.screenWidth/2;
+
+            // Set player's vertical looking direction
+            if (mouseY < 0)
+            {
+                if (mouseX < (0 - mouseY) && mouseX > (0 + mouseY))
+                {
+                    lookingDirection = "up";
+                }
+            }
+            else if (mouseY > 0)
+            {
+                if (mouseX < (0 + mouseY) && mouseX > (0 - mouseY))
+                {
+                    lookingDirection = "down";
+                }
+            }
+
+            // Set player's horizontal looking direction
+            if (mouseX < 0)
+            {
+                if (mouseY < (0 - mouseX) && mouseY > (0 + mouseX))
+                {
+                    lookingDirection = "left";
+                }
+            }
+            else if (mouseX > 0)
+            {
+                if (mouseY < (0 + mouseX) && mouseY > (0 - mouseX))
+                {
+                    lookingDirection = "right";
+                }
+            }
+
+
             if (keyH.upPressed)
             {
-                direction = "up";
+                movingDirection = "up";
             }
             else if (keyH.downPressed)
             {
-                direction = "down";
+                movingDirection = "down";
             }
 
             // Set player's horizontal direction
             if (keyH.leftPressed)
             {
-                direction = "left";
+                movingDirection = "left";
             }
             else if (keyH.rightPressed)
             {
-                direction = "right";
+                movingDirection = "right";
             }
 
 
@@ -189,7 +239,7 @@ namespace MyGameProject
 
 
             // Change sprite according to direction
-            switch (direction)
+            switch (lookingDirection)
             {
                 case "up":
                     sprite = (spriteNumber == 1) ? up1 : up2;
@@ -215,6 +265,16 @@ namespace MyGameProject
             // Draw player's coin amount
             string coinText = "Coin: " + Convert.ToString(coin);
             graphics.DrawString(coinText, new Font("Arial", 12), Brushes.White, new PointF(700, 5));
+
+            // Mouse Position and Direction Logs
+            string mousePosLog = "X: " + Convert.ToString(mouseX) + ", Y: " + Convert.ToString(mouseY);
+            string lookingDirLog = "Looking Direction: " + lookingDirection;
+            string movingDirLog = "Moving Direction: " + movingDirection;
+            graphics.DrawString(mousePosLog, new Font("Arial", 12), Brushes.Yellow, new PointF(450, 20));
+            graphics.DrawString("Mouse Position", new Font("Arial", 12), Brushes.Yellow, new PointF(450, 5));
+            graphics.DrawString(lookingDirLog, new Font("Arial", 12), Brushes.Yellow, new PointF(250, 5));
+            graphics.DrawString(movingDirLog, new Font("Arial", 12), Brushes.Yellow, new PointF(250, 20));
+            graphics.DrawString(Convert.ToString(newSpeed), new Font("Arial", 12), Brushes.Yellow, new PointF(150, 20));
         }
     }
 }

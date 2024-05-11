@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 
-namespace MyGameProject
+namespace ElderBorn
 {
     // Define the IRunnable interface
     public interface IRunnable
@@ -33,7 +33,8 @@ namespace MyGameProject
 
         // Temp
         string FPSCounter = "";
-        public string log = "";
+        string log = "";
+        public Point windowOffset;
 
 
         // Initialization
@@ -50,12 +51,13 @@ namespace MyGameProject
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff)
         {
             player = p;
             tileH = th;
             collisionD = cd;
             objectH = oh;
+            windowOffset = woff;
         }
 
 
@@ -108,6 +110,7 @@ namespace MyGameProject
             while (isRunning)
             {
                 
+
                 // Update the components
                 update();
 
