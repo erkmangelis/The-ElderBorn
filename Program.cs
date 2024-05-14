@@ -48,17 +48,19 @@ namespace ElderBorn
             
             
             // Create new objects from classes
+            Sound? sound = new Sound();
             TileHandler? tileH = new TileHandler(gamePanel);
-            Player? player = new Player(gamePanel, keyH);
+            Player? player = new Player(gamePanel, keyH, sound);
             CollisionDetector? collisionD = new CollisionDetector(gamePanel);
             ObjectHandler? objectH = new ObjectHandler(gamePanel);
 
 
+            // Calculating window off set for mouse positioning
             Point windowOffset = gameWindow.PointToScreen(gamePanel.Location);
 
 
             // Sets created objects to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset);
+            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, sound);
 
 
             // Thread Start-Stop

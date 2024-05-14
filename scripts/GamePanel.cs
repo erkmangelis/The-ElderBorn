@@ -29,6 +29,7 @@ namespace ElderBorn
         public TileHandler? tileH;
         public CollisionDetector? collisionD;
         public ObjectHandler? objectH;
+        public Sound? sound;
         
 
         // Temp
@@ -51,13 +52,14 @@ namespace ElderBorn
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, Sound s)
         {
             player = p;
             tileH = th;
             collisionD = cd;
             objectH = oh;
             windowOffset = woff;
+            sound = s;
         }
 
 

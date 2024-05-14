@@ -4,6 +4,7 @@ namespace ElderBorn
     {
         GamePanel gamePanel;
         KeyHandler keyH;
+        Sound sound;
 
         public int screenX;
         public int screenY;
@@ -14,10 +15,11 @@ namespace ElderBorn
 
 
         // Initialization
-        public Player(GamePanel gameP, KeyHandler keyH)
+        public Player(GamePanel gameP, KeyHandler keyH, Sound sound)
         {
             this.gamePanel = gameP;
             this.keyH = keyH;
+            this.sound = sound;
 
             screenX = Config.screenWidth / 2 - (Config.tileSize / 2);
             screenY = Config.screenHeight / 2 - (Config.tileSize / 2);
@@ -217,6 +219,8 @@ namespace ElderBorn
                 {
                     case "Coin":
                         coin++;
+                        sound.set(0);
+                        sound.play();
                         gamePanel.objectH.objects[i] = null;
                         break;
 
