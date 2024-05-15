@@ -48,9 +48,10 @@ namespace ElderBorn
             
             
             // Create new objects from classes
-            Sound? sound = new Sound();
+            SoundBox? soundBox = new SoundBox();
+            MusicBox? musicBox = new MusicBox();
             TileHandler? tileH = new TileHandler(gamePanel);
-            Player? player = new Player(gamePanel, keyH, sound);
+            Player? player = new Player(gamePanel, keyH);
             CollisionDetector? collisionD = new CollisionDetector(gamePanel);
             ObjectHandler? objectH = new ObjectHandler(gamePanel);
 
@@ -60,7 +61,7 @@ namespace ElderBorn
 
 
             // Sets created objects to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, sound);
+            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, soundBox, musicBox);
 
 
             // Thread Start-Stop

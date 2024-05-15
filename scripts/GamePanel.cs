@@ -29,7 +29,8 @@ namespace ElderBorn
         public TileHandler? tileH;
         public CollisionDetector? collisionD;
         public ObjectHandler? objectH;
-        public Sound? sound;
+        public SoundBox? soundBox;
+        public MusicBox? musicBox;
         
 
         // Temp
@@ -52,14 +53,56 @@ namespace ElderBorn
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, Sound s)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, SoundBox sb, MusicBox mb)
         {
             player = p;
             tileH = th;
             collisionD = cd;
             objectH = oh;
             windowOffset = woff;
-            sound = s;
+            soundBox = sb;
+            musicBox = mb;
+        }
+
+
+        // Play sound effect
+        public void playSE(string sound, bool loop)
+        {
+            if (!loop)
+            {
+                soundBox.play(sound);
+            }
+            else
+            {
+                soundBox.loop(sound);
+            }
+            
+        }
+
+        // Stop sound effect
+        public void stopSE()
+        {
+            soundBox.stop();
+        }
+
+
+        // Play music
+        public void playMusic(string sound, bool loop)
+        {
+            if (loop)
+            {
+                musicBox.Loop(sound);
+            }
+            else
+            {
+                musicBox.Play(sound);
+            }
+        }
+
+        // Stop music
+        public void stopMusic(string sound)
+        {
+            musicBox.Stop(sound);
         }
 
 
@@ -78,6 +121,7 @@ namespace ElderBorn
                 isRunning = true;
                 gameThread = new Thread(Run);
                 gameThread.Start();
+                playMusic("theme", true); // TEMP
             }
         }
         
