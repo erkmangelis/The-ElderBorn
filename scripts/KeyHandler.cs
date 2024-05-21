@@ -3,6 +3,7 @@ namespace ElderBorn
     public class KeyHandler
     {
         public bool upPressed, downPressed, leftPressed, rightPressed;
+        public bool logOn = false;
 
 
         // Handle Key Press Event
@@ -23,6 +24,17 @@ namespace ElderBorn
             if (key == Keys.D)
             {
                 rightPressed = isPressed;
+            }
+            if (key == Keys.L)
+            {
+                if (!logOn)
+                {
+                    logOn = true;
+                }
+                else
+                {
+                    logOn = false;
+                }
             }
         }
 

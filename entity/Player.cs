@@ -2,15 +2,15 @@ namespace ElderBorn
 {
     public class Player : Entity
     {
-        GamePanel gamePanel;
-        KeyHandler keyH;
+        GamePanel? gamePanel;
+        KeyHandler? keyH;
 
         public int screenX;
         public int screenY;
 
 
         // Items
-        int coin = 0;
+        public int coin = 0;
 
 
         // Initialization
@@ -219,6 +219,7 @@ namespace ElderBorn
                         coin++;
                         gamePanel.playSE("coin", false);
                         gamePanel.objectH.objects[i] = null;
+                        gamePanel.userI.showNotification("+1 Coin");
                         break;
 
                     case "Pig":
@@ -226,6 +227,11 @@ namespace ElderBorn
                         {
                             coin = 0;
                             gamePanel.objectH.objects[i] = null;
+                            gamePanel.userI.showNotification("Coins gathered \n successfully");
+                        }
+                        else
+                        {
+                            gamePanel.userI.showNotification("Must have 3x Coin");
                         }
                         break;
                 }
@@ -263,19 +269,21 @@ namespace ElderBorn
             // Draw player sprite
             graphics.DrawImage(sprite, new Rectangle (screenX, screenY, Config.tileSize, Config.tileSize));
             
-            // Draw player's coin amount
-            string coinText = "Coin: " + Convert.ToString(coin);
-            graphics.DrawString(coinText, new Font("Arial", 12), Brushes.White, new PointF(700, 5));
-
             // Mouse Position and Direction Logs
-            string mousePosLog = "X: " + Convert.ToString(mouseX) + ", Y: " + Convert.ToString(mouseY);
+            string mousePosLog = " Mouse Position: [X: " + Convert.ToString(mouseX) + ", Y: " + Convert.ToString(mouseY) + "]";
             string lookingDirLog = "Looking Direction: " + lookingDirection;
             string movingDirLog = "Moving Direction: " + movingDirection;
-            graphics.DrawString(mousePosLog, new Font("Arial", 12), Brushes.Yellow, new PointF(450, 20));
-            graphics.DrawString("Mouse Position", new Font("Arial", 12), Brushes.Yellow, new PointF(450, 5));
-            graphics.DrawString(lookingDirLog, new Font("Arial", 12), Brushes.Yellow, new PointF(250, 5));
-            graphics.DrawString(movingDirLog, new Font("Arial", 12), Brushes.Yellow, new PointF(250, 20));
-            graphics.DrawString(Convert.ToString(newSpeed), new Font("Arial", 12), Brushes.Yellow, new PointF(150, 20));
+
+            if (keyH.logOn)
+            {
+                gamePanel.logConsole.logMessage($"-------[ Log Time: {DateTime.Now} ]-------");
+                gamePanel.logConsole.logMessage(mousePosLog);
+                gamePanel.logConsole.logMessage(lookingDirLog);
+                gamePanel.logConsole.logMessage(movingDirLog);
+                gamePanel.logConsole.logMessage("Player Speed: " + Convert.ToString(newSpeed));
+                gamePanel.logConsole.logMessage($"Coin x{coin}");
+            }
+            
         }
     }
 }

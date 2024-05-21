@@ -46,8 +46,13 @@ namespace ElderBorn
             //gamePanel.Dock = DockStyle.Fill; // Cover window with gamePanel
             gameWindow.Controls.Add(gamePanel);
             
+
+            // Initializing the LogConsole
+            LogConsole logConsole = new LogConsole();
+
             
             // Create new objects from classes
+            UI ui = new UI(gamePanel);
             SoundBox? soundBox = new SoundBox();
             MusicBox? musicBox = new MusicBox();
             TileHandler? tileH = new TileHandler(gamePanel);
@@ -61,7 +66,7 @@ namespace ElderBorn
 
 
             // Sets created objects to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, soundBox, musicBox);
+            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, soundBox, musicBox, ui, logConsole);
 
 
             // Thread Start-Stop

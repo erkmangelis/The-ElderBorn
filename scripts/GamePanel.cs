@@ -31,11 +31,14 @@ namespace ElderBorn
         public ObjectHandler? objectH;
         public SoundBox? soundBox;
         public MusicBox? musicBox;
+        public UI? userI;
+        public LogConsole logConsole;
         
 
         // Temp
-        string FPSCounter = "";
-        string log = "";
+        public string FPSCounter = "";
+        public double playedTime = 0;
+        public string log = "";
         public Point windowOffset;
 
 
@@ -53,7 +56,7 @@ namespace ElderBorn
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, SoundBox sb, MusicBox mb)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, SoundBox sb, MusicBox mb, UI ui, LogConsole lc)
         {
             player = p;
             tileH = th;
@@ -62,6 +65,8 @@ namespace ElderBorn
             windowOffset = woff;
             soundBox = sb;
             musicBox = mb;
+            userI = ui;
+            logConsole = lc;
         }
 
 
@@ -163,6 +168,8 @@ namespace ElderBorn
                 // Draw the screen with updated information
                 Invalidate();
                 
+                // Played Time
+                playedTime += (double)1/60;
 
                 // Calculate the remaining time
                 long remainingTime = drawInterval - stopwatch.ElapsedTicks;
@@ -186,7 +193,8 @@ namespace ElderBorn
                 if (timer >= 1000000)
                 {
                     // Print out the FPS
-                    FPSCounter = "FPS: " + Convert.ToString(drawCount);
+                    //FPSCounter = "FPS: " + Convert.ToString(drawCount);
+                    FPSCounter = Convert.ToString(drawCount);
 
                     // Reset the timer and drawCount
                     drawCount = 0;
@@ -212,6 +220,7 @@ namespace ElderBorn
         {
             Graphics graphics = e.Graphics;
 
+            Stopwatch stpw = Stopwatch.StartNew();
 
             // Components that must be rendered
             // Tile
@@ -223,9 +232,17 @@ namespace ElderBorn
             // Player
             player.draw(graphics);
 
-            Font myFont = new Font("Arial", 12);
-            graphics.DrawString(FPSCounter, myFont, Brushes.White, new PointF(5,5));
-            graphics.DrawString(log, myFont, Brushes.White, new PointF(700,5));
+            // UI
+            userI.draw(graphics);
+
+            // DEBUG
+            stpw.Stop();
+            float elapsedTime = stpw.ElapsedTicks * (1000000000L / Stopwatch.Frequency);
+            
+            if (keyH.logOn)
+            {
+                logConsole.logMessage($"Elapsed time while rendering: {elapsedTime} nanoseconds");
+            }
         }
         
     }

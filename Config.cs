@@ -5,7 +5,7 @@ namespace ElderBorn
     {
         // Game Settings
         public static int FPS = 60;
-        public static int tileSize = 48;
+        public static int tileSize = 64;
 
         
         // Screen Settings
