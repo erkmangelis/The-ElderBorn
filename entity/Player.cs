@@ -9,8 +9,27 @@ namespace ElderBorn
         public int screenY;
 
 
+        // Stats
+        public double maxHp;
+        public double hp;
+        public int vit;
+        public int intlg;
+        public int str;
+        public int dex;
+
+
+        // Mouse Location
+        int mouseX;
+        int mouseY;
+        int newSpeed;
+
+
         // Items
         public int coin = 0;
+
+
+        // HP/Stamina Bar
+        public int hpBar;
 
 
         // Initialization
@@ -30,6 +49,14 @@ namespace ElderBorn
             cbWidth = 14;
             cbHeight = 24;
             collisionBox = new Rectangle(cbX, cbY, cbWidth, cbHeight);
+
+            // Stats
+            maxHp = 1000.0;
+            hp = maxHp;
+            vit = 5;
+            intlg = 3;
+            str = 8;
+            dex = 6;
 
             setDefaultValues();
             getPlayerSprite();
@@ -68,13 +95,14 @@ namespace ElderBorn
         }
 
 
-        int mouseX;
-        int mouseY;
-        int newSpeed;
-
         // Update player
         public void update()
         {
+            if (hp > 0)
+            {
+                hp -= 1;
+            }
+
             // Default collision value
             collisionOn = false;
 
@@ -282,6 +310,7 @@ namespace ElderBorn
                 gamePanel.logConsole.logMessage(movingDirLog);
                 gamePanel.logConsole.logMessage("Player Speed: " + Convert.ToString(newSpeed));
                 gamePanel.logConsole.logMessage($"Coin x{coin}");
+                gamePanel.logConsole.logMessage("HP: " + Convert.ToString(hp));
             }
             
         }

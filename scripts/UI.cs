@@ -50,15 +50,27 @@ namespace ElderBorn
             // Draw UI Frame
             graphics.DrawImage(components["UI"], new Rectangle(0, 0, Config.screenWidth, Config.screenHeight));
 
+            // Draw HP Bar and Mana Bar
+            graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 237, 28, 28)), new Rectangle(448, 707, (int)(128*(gamePanel.player.hp/gamePanel.player.maxHp)), 9));
+            graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 99, 151, 230)), new Rectangle(448, 724, 128, 9));
+
+            // Draw Stats Window
+            graphics.DrawString("Username1", arial12, Brushes.White, new PointF(30,45));
+            graphics.DrawString("_________", arial12, Brushes.White, new PointF(30,47));
+            graphics.DrawString("Vitality: " + gamePanel.player.vit, arial12, Brushes.White, new PointF(30,70));
+            graphics.DrawString("Intelligence: " + gamePanel.player.intlg, arial12, Brushes.White, new PointF(30,90));
+            graphics.DrawString("Strength: " + gamePanel.player.str, arial12, Brushes.White, new PointF(30,110));
+            graphics.DrawString("Dexterity: " + gamePanel.player.dex, arial12, Brushes.White, new PointF(30,130));
+
+            // Draw Stage Info
+            graphics.DrawString("Stage X", arial12, Brushes.White, new PointF(480, 45));
+
             // Draw FPS
             graphics.DrawString(gamePanel.FPSCounter, arial12, Brushes.White, new PointF(963,40));
 
             // Draw Played Time
             graphics.DrawString("Played Time", arial12, Brushes.White, new PointF(34,205));
             graphics.DrawString(($"{gamePanel.playedTime:0.0}"), arial12, Brushes.White, new PointF(63,225));
-
-            // Draw Log
-            graphics.DrawString(gamePanel.log, arial12, Brushes.White, new PointF(650,5));
 
             // Draw coin amount that player has
             graphics.DrawImage(components["coin"], new Rectangle(670, 0, Config.tileSize, Config.tileSize));
