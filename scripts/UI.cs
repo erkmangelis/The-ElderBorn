@@ -25,7 +25,7 @@ namespace ElderBorn
             {
                 components = new Dictionary<string, Bitmap>
                 {
-                    {"coin", new Bitmap("./assets/objects/coin.png")},
+                    {"coin", new Bitmap("./assets/UIcomponents/coinSymbol.png")},
                     {"UI", new Bitmap("./assets/UIcomponents/UI.png")}
                 };
             }
