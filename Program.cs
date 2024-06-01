@@ -26,8 +26,7 @@ namespace ElderBorn
             gameWindow.Size = new Size(Config.screenWidth + borderWidth, Config.screenHeight + borderHeight); // Window Size
             gameWindow.Text = "The ElderBorn"; // Window Title
 
-            // Temp
-            string windowLog = "";
+
 
             gameWindow.StartPosition = FormStartPosition.CenterScreen; // Start Position
             gameWindow.FormBorderStyle = FormBorderStyle.FixedSingle; // Window Style 
@@ -59,6 +58,7 @@ namespace ElderBorn
             Player? player = new Player(gamePanel, keyH);
             CollisionDetector? collisionD = new CollisionDetector(gamePanel);
             ObjectHandler? objectH = new ObjectHandler(gamePanel);
+            NPC? npc = new NPC(gamePanel);
 
 
             // Calculating window off set for mouse positioning
@@ -66,7 +66,7 @@ namespace ElderBorn
 
 
             // Sets created objects to gamePanel
-            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, soundBox, musicBox, ui, logConsole);
+            gamePanel.setComponents(player, tileH, collisionD, objectH, windowOffset, soundBox, musicBox, ui, logConsole, npc);
 
 
             // Thread Start-Stop

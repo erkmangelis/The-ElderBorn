@@ -4,6 +4,10 @@ namespace ElderBorn
     {
         public bool upPressed, downPressed, leftPressed, rightPressed;
         public bool logOn = false;
+        // Game State
+        public int gameState;
+        public int playState = 1;
+        public int pauseState = 2;
 
 
         // Handle Key Press Event
@@ -27,14 +31,12 @@ namespace ElderBorn
             }
             if (key == Keys.L)
             {
-                if (!logOn)
-                {
-                    logOn = true;
-                }
-                else
-                {
-                    logOn = false;
-                }
+                logOn = (!logOn) ? true : false;
+            }
+
+            if (key == Keys.Escape)
+            {
+                gameState = (gameState == playState) ? pauseState : playState;
             }
         }
 

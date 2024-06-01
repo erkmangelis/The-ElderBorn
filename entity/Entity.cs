@@ -3,6 +3,7 @@ namespace ElderBorn
 
     public class Entity
     {
+        public GamePanel gamePanel;
         public int worldX, worldY;
         public int speed;
 
@@ -21,5 +22,9 @@ namespace ElderBorn
         public int cbHeight; // CollisionBox's Height value
         public Rectangle collisionBox;
 
+        public Entity(GamePanel gamePanel)
+        {
+            this.gamePanel = gamePanel;
+        }
     }
 }

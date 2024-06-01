@@ -2,7 +2,6 @@ namespace ElderBorn
 {
     public class Player : Entity
     {
-        GamePanel? gamePanel;
         KeyHandler? keyH;
 
         public int screenX;
@@ -33,9 +32,8 @@ namespace ElderBorn
 
 
         // Initialization
-        public Player(GamePanel gameP, KeyHandler keyH)
+        public Player(GamePanel gamePanel, KeyHandler keyH) : base(gamePanel)
         {
-            this.gamePanel = gameP;
             this.keyH = keyH;
 
             screenX = Config.screenWidth / 2 - (Config.tileSize / 2);

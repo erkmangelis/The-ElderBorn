@@ -23,7 +23,7 @@ namespace ElderBorn
         int FPS;
 
         // Declaring Classes
-        KeyHandler? keyH = new KeyHandler();
+        public KeyHandler? keyH = new KeyHandler();
         Thread? gameThread;
         public Player? player;
         public TileHandler? tileH;
@@ -33,7 +33,7 @@ namespace ElderBorn
         public MusicBox? musicBox;
         public UI? userI;
         public LogConsole logConsole;
-        
+        public NPC? npc;
 
         // Temp
         public string FPSCounter = "";
@@ -56,7 +56,7 @@ namespace ElderBorn
 
 
         // Setting Classes
-        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, SoundBox sb, MusicBox mb, UI ui, LogConsole lc)
+        public void setComponents(Player p, TileHandler th, CollisionDetector cd, ObjectHandler oh, Point woff, SoundBox sb, MusicBox mb, UI ui, LogConsole lc, NPC n)
         {
             player = p;
             tileH = th;
@@ -67,6 +67,7 @@ namespace ElderBorn
             musicBox = mb;
             userI = ui;
             logConsole = lc;
+            npc = n;
         }
 
 
@@ -114,7 +115,8 @@ namespace ElderBorn
         // Prepare the components that must be ready before the game start
         public void setupGame()
         {
-
+            keyH.gameState = keyH.playState;
+            playMusic("theme", true);
         }
 
 
@@ -126,7 +128,8 @@ namespace ElderBorn
                 isRunning = true;
                 gameThread = new Thread(Run);
                 gameThread.Start();
-                playMusic("theme", true); // TEMP
+                
+                setupGame();
             }
         }
         
@@ -211,7 +214,16 @@ namespace ElderBorn
         // Updates components
         public void update()
         {
-            player.update();
+            if (keyH.gameState == keyH.playState)
+            {
+                player.update();
+                npc.update();
+            }
+
+            if (keyH.gameState == keyH.pauseState)
+            {
+
+            }
         }
 
 
@@ -231,6 +243,9 @@ namespace ElderBorn
 
             // Player
             player.draw(graphics);
+            
+            // NPC
+            npc.draw(graphics);
 
             // UI
             userI.draw(graphics);

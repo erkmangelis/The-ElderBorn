@@ -5,6 +5,7 @@ namespace ElderBorn
         GamePanel? gamePanel;
         Dictionary<string, Bitmap> components;
         Font arial12 = new Font("Arial", 12);
+        Font arial40 = new Font("Arial", 40);
         public bool notificationOn = false;
         public string notification = "";
         int notificationTimer = 0;
@@ -43,9 +44,41 @@ namespace ElderBorn
             notificationOn = true;
         }
 
+        int textCenter(string text, Font font, Graphics graphics)
+        {
+            SizeF textSize = graphics.MeasureString(text, font);
+            return (int)textSize.Width/2;
+        }
+
 
         // Draw UI
         public void draw(Graphics graphics)
+        {
+            switch(gamePanel.keyH.gameState)
+            {
+                case 1:
+                    drawPlayScreen(graphics);
+                    break;
+
+                case 2:
+                    drawPauseScreen(graphics);
+                    break;
+            }
+            
+        }
+
+
+        // Draw Pause Screen
+        void drawPauseScreen(Graphics graphics)
+        {
+            string text = "Game Paused";
+            graphics.FillRectangle(new SolidBrush(Color.FromArgb(150, 0, 0, 0)), new Rectangle(0, 0, Config.screenWidth, Config.screenHeight));
+            graphics.DrawString(text, arial40, Brushes.White, new PointF(Config.screenWidth/2-textCenter(text, arial40, graphics), Config.screenHeight/2));
+        }
+
+        
+        // Draw Play Screen
+        void drawPlayScreen(Graphics graphics)
         {
             // Draw UI Frame
             graphics.DrawImage(components["UI"], new Rectangle(0, 0, Config.screenWidth, Config.screenHeight));
@@ -87,7 +120,6 @@ namespace ElderBorn
                     notificationOn = false;
                     notificationTimer = 0;
                 }
-                
             }
         }
     }
