@@ -18,8 +18,8 @@ namespace ElderBorn
 
             sounds = new Dictionary<string, string>
             {
-                { "theme", "./sounds/theme.wav" },
-                { "coin", "./sounds/coin.wav" }
+                { "theme", "./sounds/theme.mp3" },
+                { "theme2", "./sounds/theme.wav" }
             };
         }
 

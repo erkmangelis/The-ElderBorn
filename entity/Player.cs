@@ -96,7 +96,7 @@ namespace ElderBorn
         // Update player
         public void update()
         {
-            if (hp > 0)
+            if (hp >= 150)
             {
                 hp -= 1;
             }
